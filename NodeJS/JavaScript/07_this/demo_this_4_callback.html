@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+</head>
+
+<body>
+    <div id="debug"></div>
+
+    <script>
+
+        class Creature {
+            constructor(weightValue = 1) {
+                this.name = "cicada";
+            }
+            makeSound() {
+                console.log(this);
+                console.log(this.name);
+                let mythis = this;
+                setTimeout(function () { //setTimeout 是掛在瀏覽器 Window 底下的function , 所以 this 會變 window
+                    console.log(this);
+                    console.log(this.name);  // nothing?
+                    console.log(obj.name); // 變數掛在window 下 所以可以抓的到
+                    console.log(mythis.name);
+                }, 1000)
+            }
+        }
+        const obj = new Creature();
+        obj.makeSound();
+
+
+        // class Creature {
+        //     constructor(weightValue = 1) {
+        //         this.name = "cicada";
+        //     }
+        //     makeSound() {
+        //         console.log(this.name);
+        //         const _this = this;
+        //         setTimeout(function () {
+        //             console.log(_this.name);
+        //         }, 1000)
+        //     }
+        // }
+        // const obj = new Creature();
+        // obj.makeSound();
+
+
+        // class Creature {
+        //     constructor(weightValue = 1) {
+        //         this.name = "cicada";
+        //     }
+        //     makeSound() {
+        //         console.log(this.name);
+        //         setTimeout(() => { //箭頭蟲洞效果 可以沿用原 function this
+        //             console.log(this.name);
+        //         }, 1000)
+        //     }
+        // }
+        // const obj = new Creature();
+        // obj.makeSound();
+
+
+    </script>
+
+</body>
+
+</html>

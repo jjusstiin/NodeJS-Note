@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!-- 這個範例請置於 Web Server，以  http:// 存取方式執行， file:// 測不出效果 -->
+<html>
+<head>
+<title>Demo</title>
+<meta charset="UTF-8">
+</head>
+<body>
+
+	<p>
+		counted: <span id="result"></span>
+	</p>
+	<button onclick="startWorker()">Start a worker</button>
+	<button onclick="objWorker.terminate();">Stop the worker</button>
+	<br>
+	<br>
+
+	<script>
+		var objWorker;
+
+		function startWorker() {
+			
+			if (typeof (Worker) !== "undefined") {
+				if (typeof (w) == "undefined") {
+					objWorker = new Worker("Demo_Worker.js");
+				}
+				objWorker.onmessage = function(event) {
+					document.getElementById("result").innerHTML = event.data;
+				};
+			} else {
+				document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Workers...";
+			}
+		}
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="canvasLab" width="240" height="200"
+            style="border:1px solid #000000;"></canvas>
+    <canvas id="canvasSmall" width="120" height="100"
+            style="border:1px solid #000000;"></canvas>
+    <img id="imgView" width="120" height="100" style="border:1px solid #000000;"
+
+    />
+
+    <div>
+        <a id="aDownload" href="#">Download</a>
+    </div>
+
+    <img id="imgRabbit" src="rabbit_240x200.jpeg" style="display: block;"/>
+
+    <script>
+
+        window.onload = init;
+
+        function init() {
+            const c = document.getElementById("canvasLab");
+            let ctx = c.getContext('2d');
+
+            ctx.arc(120, 100, 90, 2 * Math.PI, false); // x軸, y軸, 半徑, 路徑.5啪開始, 路徑2啪結束, true，逆時針繪圆弧
+            ctx.stroke(); //劃出
+            ctx.clip(); //遮色片
+            ctx.drawImage(imgRabbit, 0, 0);
+
+            const cs = document.getElementById("canvasSmall");
+            let ctxSmall = cs.getContext('2d');
+            ctxSmall.drawImage(canvasLab, 0, 0, 240, 200, 0, 0, 120, 100); //ctx.drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight);
+
+            //圖片灰階
+            var imgData = ctxSmall.getImageData(0, 0, 120, 100);
+            var data = imgData.data;
+            for (var i = 0; i < data.length; i += 4) {
+                var avg = (data[i] + data[i + 1] + data[i + 2]) / 3;
+                data[i] = avg; // red
+                data[i + 1] = avg; // green
+                data[i + 2] = avg; // blue
+            }
+            ctxSmall.putImageData(imgData, 0, 0);
+
+            console.log(canvasSmall.toDataURL(("image/png"))); //取出圖片
+            imgView.src = canvasSmall.toDataURL("image/png");   //連結到某img內
+        }
+
+    </script>
+</body>
+</html>

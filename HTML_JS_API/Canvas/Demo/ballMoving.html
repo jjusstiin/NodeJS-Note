@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <canvas id="playGround" width="600" height="400"></canvas>
+    <script>
+         let ctx = playGround.getContext('2d');
+
+        let ball = {
+            x:10,
+            y:10,
+            vx:2,
+            vy:3,
+            r:10
+        }
+
+        let _keyStatus = 'none';
+
+        document.onkeydown = function(){
+            switch(event.keyCode){
+                case 38: //up
+                    _keyStatus = 'up';
+                    break;
+                case 40: //down
+                    _keyStatus = 'down';
+                    break;
+                case 37: //left
+                    _keyStatus = 'left';
+                    break;
+                case 39: //right
+                    _keyStatus = 'right';
+                    break;      
+            }
+            console.log(event.keyCode);
+        }
+
+        setInterval( function(){
+
+                ball.x += ball.vx;
+                ball.y += ball.vy;
+            if(ball.y + ball.r > playGround.height || _keyStatus == 'up'){ 
+                ball.vy = -1 * Math.abs(ball.vy)
+            }
+            if(ball.y - ball.r <= 0 || _keyStatus == 'down'){ 
+                ball.vy = Math.abs(ball.vy)
+            }
+            if(ball.x + ball.r > playGround.width || _keyStatus == 'left'){
+                ball.vx = -1 * Math.abs(ball.vx)
+            }
+            if(ball.x - ball.r <= 0 || _keyStatus == 'right'){   
+                ball.vx = Math.abs(ball.vx)
+            }
+
+            _keyStatus = 'none';
+
+            ctx.fillStyle = '#0000000';
+            ctx.fillRect(0,0, playGround.width, playGround.height);
+
+            ctx.strokeStyle = '#ffff';
+            ctx.beginPath();
+            ctx.arc(ball.x, ball.y, ball.r, 0, 2 * Math.PI);
+            ctx.stroke();
+
+        }, 500/100);
+    </script>
+</body>
+</html>

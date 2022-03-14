@@ -1,0 +1,2 @@
+npm install nodemon -g //-g全域安裝
+"start": "nodemon app.js" 持續監聽

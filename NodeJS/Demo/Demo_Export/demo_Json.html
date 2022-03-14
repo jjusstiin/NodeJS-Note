@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="debug">....</div>
+    <script>
+        let playerList = [
+            {firstName : "jeremy",lastName: "Lin"},
+            {firstName : "Derek",lastName: "Jeter"},
+            {firstName : "Lion",lastName: "Messi"}
+        ]
+        let s = JSON.stringify(playerList);
+        let s2 = '[{"firstName" : "jeremy","lastName": "Lin"},{"firstName" : "Derek","lastName": "Jeter"},{"firstName" : "Lion","lastName": "Messi"}]'
+        let datalist = JSON.parse(s2);
+        debug.innerText = datalist[1].lastName;
+    </script>
+</body>
+</html>

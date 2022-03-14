@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="debug1"></div>
+    <div id="debug2"></div>
+
+    <script>
+        class CAnimal {
+            constructor(weightValue = 5) {
+                this._weight = 10;
+                this.weight = weightValue;
+            }
+            get weight() {
+                return this._weight;
+            }
+            set weight(x) {
+                if (x > 0) {
+                    this._weight = x;
+                }
+            }
+            makeSound(who) {
+                alert(`Animal: ${who}`);
+            }
+        }
+
+        let obj = new CAnimal();
+        debug1.innerText = obj._weight;
+        obj.weight = 100; //進入 set 計算
+        obj.weight = -3;
+        debug2.innerText = obj.weight;
+
+        class CDog extends CAnimal {
+            constructor(weightValue, location = 'Earth'){
+                super(weightValue);
+                this.location = location;
+            }
+            makeSound(who) {
+                super.makeSound(who); //super沿用
+                alert("Dog barking!");
+            }
+        }
+
+        let dog = new CDog();
+        alert(dog.weight);
+        alert(dog.location); 
+        dog.makeSound('dog');
+
+    </script>
+
+</body>
+
+</html>

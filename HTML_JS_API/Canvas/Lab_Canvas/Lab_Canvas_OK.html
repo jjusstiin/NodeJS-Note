@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+
+<canvas id="myCanvas" width="400" height="300" 
+  style="border:1px solid #000000;">
+</canvas> 
+
+
+<script>
+  // HTML5 Canvas 繪圖三部曲:
+  // 1. 找出 Canvas
+  let canvas = /** @type {HTMLCanvasElement} */ (document.getElementById("myCanvas")); //提供vscode canvas提示
+  // 2. 傳回 2D 繪圖引擎物件
+  var ctx = canvas.getContext("2d");
+  // 3. 開始作畫
+
+  // 用藍色畫出圖片外框
+  //筆的顏色
+  ctx.strokeStyle = "#90ee90";
+  ctx.strokeRect(50, 0, 300, 200);
+
+  // 以黑色塗滿圖片下緣製作出黑底區塊
+  ctx.fillStyle = "#ffc0cb";
+  ctx.fillRect(0, 50, 400, 50);
+
+  ctx.moveTo(0,300);
+  ctx.lineTo(200,200);
+  ctx.lineTo(400,300);
+  ctx.lineTo(0,300);
+  // ctx.stroke();
+  ctx.fill();
+
+  /** @type {HTMLCanvasElement}*/
+  ctx.moveTo(200,0);
+  ctx.lineTo(200,300);
+  ctx.moveTo(0,150);
+  ctx.lineTo(400,150);
+  ctx.stroke();
+
+  // // 置中對齊輸出文字
+  var grd = ctx.createLinearGradient(200, 150, 200, 150+72);
+  grd.addColorStop(0, "pink");
+  grd.addColorStop(1,'green');
+  ctx.font = "72px Arial italic";
+  ctx.textBaseline = "top"; // top, middle, bottom
+  ctx.textAlign = "left"; //left, center, right
+  ctx.fillStyle = grd;
+  ctx.fillText("Hello!!", 200, 150);
+
+  // // 在黑底區塊描出黑底白字文字
+  ctx.font="40px Arial italic";
+  ctx.textBaseline = "top";
+  ctx.textAlign = "center";
+  ctx.fillStyle = "#ffffff";
+  // ctx.fillText("Powered by HTML5", 200, 50);
+  ctx.strokeText("Powered by HTML5", 200, 50);
+
+  // // 刷上藍色漸層背景增添質感
+  // // 以下這段程式，若非不是一開始就畫出，就必須設定
+  // // globalCompositeOperation，否則，預設會蓋掉先前的內容
+  ctx.globalCompositeOperation = "destination-over"; //現有東西在上方
+  var grd = ctx.createLinearGradient(0, 0, 0, 50);
+  grd.addColorStop(0, "pink");
+  grd.addColorStop(1,'green')
+  // grd.addColorStop(2, "red");
+  ctx.fillStyle = grd;
+  ctx.fillRect(0, 0, 200, 50);
+
+</script>
+
+</body>
+</html>

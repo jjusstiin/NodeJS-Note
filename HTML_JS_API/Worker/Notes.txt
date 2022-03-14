@@ -1,0 +1,3 @@
+Demo_Worker 範例請放在 Web Server 執行, 
+local hard-disk 無效。
+
